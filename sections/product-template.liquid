@@ -1,0 +1,42 @@
+{% comment %}
+This file is responsible for rendering the product details page, including the jersey size selection and additional patches functionality.
+{% endcomment %}
+
+<div class="product-template">
+  <h1>{{ product.title }}</h1>
+  <div class="product-images">
+    {% for image in product.images %}
+      <img src="{{ image | img_url: 'large' }}" alt="{{ product.title }}" />
+    {% endfor %}
+  </div>
+  
+  <div class="product-details">
+    <p>{{ product.description }}</p>
+    <p>Price: {{ product.price | money }}</p>
+    
+    <div class="size-selector">
+      {% include 'size-selector' %}
+    </div>
+    
+    <div class="additional-patches">
+      <h3>Add Patches</h3>
+      <select id="patches" name="patches">
+        <option value="none">None</option>
+        <option value="name">Name Patch</option>
+        <option value="number">Number Patch</option>
+      </select>
+    </div>
+    
+    <button id="add-to-cart" data-product-id="{{ product.id }}">Add to Cart</button>
+  </div>
+</div>
+
+<script>
+  document.getElementById('add-to-cart').addEventListener('click', function() {
+    const productId = this.getAttribute('data-product-id');
+    const size = document.querySelector('input[name="size"]:checked').value;
+    const patches = document.getElementById('patches').value;
+
+    // Add logic to handle adding the product to the cart with selected size and patches
+  });
+</script>

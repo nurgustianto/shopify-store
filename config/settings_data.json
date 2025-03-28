@@ -1,0 +1,15 @@
+{
+  "current": {
+    "theme": {
+      "name": "Shopify Jersey Store",
+      "settings": {
+        "currency": "USD",
+        "enable_size_selection": true,
+        "available_sizes": ["S", "M", "L", "XL", "XXL"],
+        "enable_additional_patches": true,
+        "patch_options": ["Name", "Number", "Custom Text"],
+        "inventory_check": true
+      }
+    }
+  }
+}

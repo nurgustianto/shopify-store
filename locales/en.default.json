@@ -1,0 +1,32 @@
+{
+  "general": {
+    "welcome": "Welcome to our Shopify Store!",
+    "cart": "Cart",
+    "checkout": "Checkout",
+    "continue_shopping": "Continue Shopping",
+    "empty_cart": "Your cart is currently empty.",
+    "view_cart": "View Cart"
+  },
+  "product": {
+    "size_selection": "Select Jersey Size",
+    "additional_patches": "Add Additional Patches",
+    "add_to_cart": "Add to Cart",
+    "in_stock": "In Stock",
+    "out_of_stock": "Out of Stock"
+  },
+  "checkout": {
+    "billing_information": "Billing Information",
+    "shipping_information": "Shipping Information",
+    "payment_information": "Payment Information",
+    "place_order": "Place Order"
+  },
+  "errors": {
+    "required_field": "This field is required.",
+    "invalid_email": "Please enter a valid email address."
+  },
+  "footer": {
+    "contact_us": "Contact Us",
+    "privacy_policy": "Privacy Policy",
+    "terms_of_service": "Terms of Service"
+  }
+}

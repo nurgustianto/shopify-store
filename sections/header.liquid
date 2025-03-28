@@ -1,0 +1,22 @@
+<header class="site-header" role="banner">
+  <div class="container">
+    <div class="site-header__logo">
+      <a href="{{ shop.url }}">
+        <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" />
+      </a>
+    </div>
+    <nav class="site-navigation" role="navigation">
+      <ul>
+        <li><a href="{{ routes.collections_url }}">Collections</a></li>
+        <li><a href="{{ routes.cart_url }}">Cart</a></li>
+        <li><a href="{{ routes.contact_url }}">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="site-header__search">
+      <form action="{{ routes.search_url }}" method="get">
+        <input type="search" name="q" placeholder="Search..." aria-label="Search" />
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</header>

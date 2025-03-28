@@ -1,0 +1,27 @@
+{% comment %} This file defines the layout for displaying a collection of products. {% endcomment %}
+
+{% comment %} Collection Title {% endcomment %}
+<h1>{{ collection.title }}</h1>
+
+{% comment %} Collection Description {% endcomment %}
+<div class="collection-description">
+  {{ collection.description }}
+</div>
+
+{% comment %} Collection Products {% endcomment %}
+<div class="collection-products">
+  {% for product in collection.products %}
+    {% include 'product-card' with product %}
+  {% endfor %}
+</div>
+
+{% comment %} Pagination {% endcomment %}
+<div class="pagination">
+  {% if collection.previous_page %}
+    <a href="{{ collection.previous_page_url }}" class="pagination-previous">Previous</a>
+  {% endif %}
+  
+  {% if collection.next_page %}
+    <a href="{{ collection.next_page_url }}" class="pagination-next">Next</a>
+  {% endif %}
+</div>

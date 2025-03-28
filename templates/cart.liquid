@@ -1,0 +1,31 @@
+{% comment %} This file defines the cart page layout, displaying items added to the cart and the checkout button. {% endcomment %}
+
+<h1>Your Cart</h1>
+
+{% if cart.item_count > 0 %}
+  <ul class="cart-items">
+    {% for item in cart.items %}
+      <li class="cart-item">
+        <div class="cart-item-image">
+          <img src="{{ item.image | img_url: 'medium' }}" alt="{{ item.product.title }}">
+        </div>
+        <div class="cart-item-details">
+          <h2>{{ item.product.title }}</h2>
+          <p>Size: {{ item.properties.size }}</p>
+          <p>Quantity: {{ item.quantity }}</p>
+          <p>Price: {{ item.price | money }}</p>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <div class="cart-total">
+    <h3>Total: {{ cart.total_price | money }}</h3>
+  </div>
+
+  <div class="cart-checkout">
+    <a href="{{ routes.checkout }}" class="btn btn-primary">Proceed to Checkout</a>
+  </div>
+{% else %}
+  <p>Your cart is currently empty.</p>
+{% endif %}

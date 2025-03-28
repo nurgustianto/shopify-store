@@ -1,0 +1,81 @@
+// Global Styles
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+// Header and Footer Styles
+header, footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+    header, footer {
+        padding: 15px;
+    }
+}
+
+// Product Card Styles
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px;
+    background-color: #fff;
+    transition: box-shadow 0.3s;
+}
+
+.product-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+// Jersey Size Selector Styles
+.size-selector {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.size-option {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.size-option:hover {
+    background-color: #f0f0f0;
+}
+
+// Checkout Button Styles
+.checkout-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.checkout-button:hover {
+    background-color: #218838;
+}
+
+// Mobile Responsiveness
+@media (max-width: 480px) {
+    .product-card {
+        margin: 5px;
+    }
+
+    .checkout-button {
+        width: 100%;
+    }
+}

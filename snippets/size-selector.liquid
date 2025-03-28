@@ -1,0 +1,22 @@
+<div class="file-content">
+{% comment %}
+This file contains the markup and logic for the jersey size selection component.
+{% endcomment %}
+<div class="size-selector">
+  <label for="size">Select Jersey Size:</label>
+  <select id="size" name="size" class="size-dropdown">
+    <option value="">--Please choose an option--</option>
+    <option value="small">Small</option>
+    <option value="medium">Medium</option>
+    <option value="large">Large</option>
+    <option value="xlarge">X-Large</option>
+  </select>
+</div>
+<script>
+  document.getElementById('size').addEventListener('change', function() {
+    const selectedSize = this.value;
+    // Logic to handle size selection, e.g., updating inventory or displaying additional options
+    console.log('Selected size:', selectedSize);
+  });
+</script>
+</div>

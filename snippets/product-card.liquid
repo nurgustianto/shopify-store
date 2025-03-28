@@ -1,0 +1,17 @@
+<div class="file-content">
+  <h3>/shopify-store/shopify-store/snippets/product-card.liquid</h3>
+  <pre>
+<div class="product-card">
+  <a href="{{ product.url | within: collection }}">
+    <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+    <h2>{{ product.title }}</h2>
+    <p class="price">{{ product.price | money }}</p>
+  </a>
+  <div class="product-info">
+    <button class="add-to-cart" data-product-id="{{ product.id }}">
+      Add to Cart
+    </button>
+  </div>
+</div>
+  </pre>
+</div>
