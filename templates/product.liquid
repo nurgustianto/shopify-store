@@ -5,54 +5,104 @@ This file defines the layout for individual product pages, integrating the produ
 <div class="product-page">
   <div class="product-images">
     <div class="main-image">
-      <img src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.title }}">
+      {% if product.featured_image %}
+        <img src="{{ product.featured_image | img_url: '800x' }}" alt="{{ product.title }}" id="ProductMainImage">
+      {% endif %}
     </div>
-    <div class="thumbnail-list">
-      {% for image in product.images %}
-        <div class="thumbnail">
-          <img src="{{ image | img_url: 'small' }}" alt="{{ product.title }}">
-        </div>
-      {% endfor %}
-    </div>
+    {% if product.images.size > 1 %}
+      <div class="product-thumbnails">
+        {% for image in product.images %}
+          <button class="thumbnail-btn" data-image-url="{{ image | img_url: '800x' }}">
+            <img src="{{ image | img_url: '100x' }}" alt="{{ image.alt | escape }}">
+          </button>
+        {% endfor %}
+      </div>
+    {% endif %}
   </div>
 
   <div class="product-details">
-    <h1>{{ product.title }}</h1>
-    <div class="product-price">{{ product.price | money }}</div>
+    <h1 class="product-title">{{ product.title }}</h1>
+    
+    <div class="product-pricing">
+      <span class="product-price">{{ product.price | money }}</span>
+      {% if product.compare_at_price > product.price %}
+        <span class="product-compare-price">{{ product.compare_at_price | money }}</span>
+        <span class="product-savings">
+          Save {{ product.compare_at_price | minus: product.price | money }}
+        </span>
+      {% endif %}
+    </div>
+
+    <div class="product-description">
+      {{ product.description }}
+    </div>
 
     {% form 'product', product, class: 'product-form', id: 'AddToCartForm' %}
+      <!-- Variant Selection -->
       {% if product.variants.size > 1 %}
-        <div class="size-selector">
-          <label for="SingleOptionSelector-0">Size</label>
-          <select name="Size" id="SingleOptionSelector-0">
+        <div class="product-variants">
+          <label for="ProductSelect">Select Size</label>
+          <select name="id" id="ProductSelect">
             {% for variant in product.variants %}
-              <option value="{{ variant.title }}">{{ variant.title }}</option>
+              <option value="{{ variant.id }}" 
+                {% if variant.available == false %}disabled{% endif %}
+                {% if variant == product.selected_or_first_available_variant %}selected{% endif %}>
+                {{ variant.title }} 
+                {% if variant.available == false %}- Sold out{% endif %}
+              </option>
             {% endfor %}
           </select>
         </div>
       {% endif %}
 
-      <div class="customization-options">
+      <!-- Jersey Customization -->
+      <div class="jersey-customization">
+        <h3>Customize Your Jersey</h3>
         <div class="input-group">
           <label for="Name">Name on Jersey</label>
-          <input type="text" id="Name" name="properties[Name]">
+          <input type="text" 
+                 id="Name" 
+                 name="properties[Name]" 
+                 maxlength="12"
+                 placeholder="Enter name (max 12 characters)">
         </div>
         <div class="input-group">
-          <label for="Number">Number on Jersey</label>
-          <input type="number" id="Number" name="properties[Number]">
+          <label for="Number">Jersey Number</label>
+          <input type="number" 
+                 id="Number" 
+                 name="properties[Number]" 
+                 min="0" 
+                 max="99"
+                 placeholder="Enter number (0-99)">
         </div>
       </div>
 
+      <!-- Quantity Selector -->
       <div class="quantity-selector">
         <label for="Quantity">Quantity</label>
         <div class="quantity-wrapper">
           <button type="button" class="quantity-adjust" data-change="decrease">-</button>
-          <input type="number" id="Quantity" name="quantity" value="1" min="1">
+          <input type="number" 
+                 id="Quantity" 
+                 name="quantity" 
+                 value="1" 
+                 min="1"
+                 max="{{ product.selected_or_first_available_variant.inventory_quantity }}">
           <button type="button" class="quantity-adjust" data-change="increase">+</button>
         </div>
+        {% if product.available %}
+          <span class="inventory-status">
+            {{ product.selected_or_first_available_variant.inventory_quantity }} in stock
+          </span>
+        {% endif %}
       </div>
 
-      <button type="submit" name="add" id="AddToCart" class="button button--primary{% unless product.available %} disabled{% endunless %}">
+      <!-- Add to Cart Button -->
+      <button type="submit" 
+              name="add" 
+              id="AddToCart" 
+              class="button button--primary{% unless product.available %} disabled{% endunless %}"
+              {% unless product.available %}disabled{% endunless %}>
         {% if product.available %}
           Add to Cart
         {% else %}
@@ -60,10 +110,6 @@ This file defines the layout for individual product pages, integrating the produ
         {% endif %}
       </button>
     {% endform %}
-
-    <div class="product-description">
-      {{ product.description }}
-    </div>
   </div>
 </div>
 
