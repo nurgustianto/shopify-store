@@ -1,0 +1,51 @@
+<div id="cart-drawer" class="cart-drawer">
+  <div class="cart-drawer__header">
+    <h2>Shopping Cart</h2>
+    <button class="cart-drawer__close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  
+  <div class="cart-drawer__content">
+    {% if cart.item_count > 0 %}
+      <form action="{{ routes.cart_url }}" method="post" novalidate>
+        {% for item in cart.items %}
+          <div class="cart-item" data-variant-id="{{ item.variant.id }}">
+            <img src="{{ item.image | img_url: '100x100' }}" alt="{{ item.title }}">
+            <div class="cart-item__details">
+              <h3>{{ item.product.title }}</h3>
+              <p>Size: {{ item.variant.title }}</p>
+              {% if item.properties['Name'] %}
+                <p>Name: {{ item.properties['Name'] }}</p>
+              {% endif %}
+              {% if item.properties['Number'] %}
+                <p>Number: {{ item.properties['Number'] }}</p>
+              {% endif %}
+            </div>
+            <div class="cart-item__price">
+              {{ item.final_line_price | money }}
+            </div>
+            <button class="cart-item__remove" data-variant-id="{{ item.variant.id }}">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        {% endfor %}
+        
+        <div class="cart-drawer__footer">
+          <div class="cart-drawer__subtotal">
+            <span>Subtotal:</span>
+            <span>{{ cart.total_price | money }}</span>
+          </div>
+          <button type="submit" name="checkout" class="button button--primary">
+            Proceed to Checkout
+          </button>
+        </div>
+      </form>
+    {% else %}
+      <div class="cart-drawer__empty">
+        <p>Your cart is empty</p>
+        <a href="/collections/all" class="button">Continue Shopping</a>
+      </div>
+    {% endif %}
+  </div>
+</div>

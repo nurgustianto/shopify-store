@@ -14,11 +14,14 @@
   {% endif %}
 
   {{ 'application.css' | asset_url | stylesheet_tag }}
+  {{ 'cart.css' | asset_url | stylesheet_tag }}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   {{ content_for_header }}
 </head>
 
 <body>
   {% section 'header' %}
+  {% section 'cart-drawer' %}
 
   <main role="main" id="MainContent">
     {{ content_for_layout }}
@@ -26,6 +29,7 @@
 
   {% section 'footer' %}
 
+  {{ 'cart.js' | asset_url | script_tag }}
   {{ 'application.js' | asset_url | script_tag }}
 </body>
 </html>
