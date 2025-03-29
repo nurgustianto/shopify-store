@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "sections": {
     "hero": {
@@ -28,4 +29,36 @@
     "featured-collection",
     "custom-patches"
   ]
+=======
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "heading": "Welcome to our Jersey Store",
+        "text": "Find your perfect jersey with custom patches"
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "jerseys",
+        "products_to_show": 4,
+        "show_view_all": true
+      }
+    },
+    "custom-patches": {
+      "type": "custom-content",
+      "settings": {
+        "title": "Customize Your Jersey",
+        "text": "Add names, numbers, and custom patches to make it your own"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "featured-collection",
+    "custom-patches"
+  ]
+>>>>>>> d46326d9a0b8f7fecde4624a797bc55c0afa06ec
 }
