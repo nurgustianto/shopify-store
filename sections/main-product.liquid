@@ -1,0 +1,107 @@
+<div class="product-page">
+  <div class="product-images">
+    <div class="product-main-image">
+      {{ product.featured_image | img_url: 'large' | img_tag }}
+    </div>
+    <div class="product-thumbnails">
+      {% for image in product.images %}
+        <div class="thumbnail">
+          {{ image | img_url: 'small' | img_tag }}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="product-details">
+    <h1>{{ product.title }}</h1>
+    <div class="price">{{ product.price | money }}</div>
+
+    {% form 'product', product %}
+      <select name="id" id="ProductSelect">
+        {% for variant in product.variants %}
+          <option value="{{ variant.id }}">
+            {{ variant.title }} - {{ variant.price | money }}
+          </option>
+        {% endfor %}
+      </select>
+
+      <!-- Size Selection -->
+      <div class="size-selector">
+        <h3>Select Size</h3>
+        <div class="size-options">
+          {% for size in product.options_by_name['Size'].values %}
+            <label class="size-option">
+              <input type="radio" name="size" value="{{ size }}">
+              <span>{{ size }}</span>
+            </label>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Patch Options -->
+      {% if settings.enable_additional_patches %}
+      <div class="patch-options">
+        <h3>Customize Jersey</h3>
+        <div class="patch-input">
+          <label for="name-patch">Name on Jersey</label>
+          <input type="text" id="name-patch" name="properties[Name]">
+        </div>
+        <div class="patch-input">
+          <label for="number-patch">Number on Jersey</label>
+          <input type="number" id="number-patch" name="properties[Number]">
+        </div>
+      </div>
+      {% endif %}
+
+      <div class="quantity">
+        <label for="Quantity">Quantity</label>
+        <input type="number" id="Quantity" name="quantity" value="1" min="1">
+      </div>
+
+      <button type="submit" name="add" class="add-to-cart"
+        {% unless product.available %}disabled{% endunless %}>
+        {% if product.available %}
+          Add to Cart
+        {% else %}
+          Sold Out
+        {% endif %}
+      </button>
+    {% endform %}
+
+    <div class="product-description">
+      {{ product.description }}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product",
+  "blocks": {
+    "title": {
+      "type": "title",
+      "name": "Title"
+    },
+    "price": {
+      "type": "price",
+      "name": "Price"
+    },
+    "variant_selector": {
+      "type": "variant_selector",
+      "name": "Variant Selector"
+    },
+    "quantity_selector": {
+      "type": "quantity_selector",
+      "name": "Quantity"
+    },
+    "buy_buttons": {
+      "type": "buy_buttons",
+      "name": "Buy buttons"
+    },
+    "description": {
+      "type": "description",
+      "name": "Description"
+    }
+  }
+}
+{% endschema %}

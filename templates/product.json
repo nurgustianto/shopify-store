@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title"
+        },
+        "price": {
+          "type": "price"
+        },
+        "variant_selector": {
+          "type": "variant_selector"
+        },
+        "quantity_selector": {
+          "type": "quantity_selector"
+        },
+        "buy_buttons": {
+          "type": "buy_buttons"
+        },
+        "description": {
+          "type": "description"
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "variant_selector",
+        "quantity_selector",
+        "buy_buttons",
+        "description"
+      ],
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

@@ -72,3 +72,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Product page functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const thumbnails = document.querySelectorAll('.thumbnail img');
+  const mainImage = document.querySelector('.product-main-image img');
+
+  thumbnails.forEach(thumb => {
+    thumb.addEventListener('click', function() {
+      mainImage.src = this.src.replace('small', 'large');
+    });
+  });
+});
