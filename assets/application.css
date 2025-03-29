@@ -1,0 +1,26 @@
+.hero {
+  padding: 2rem;
+  text-align: center;
+  background-color: #f8f9fa;
+}
+
+.featured-collection {
+  padding: 2rem;
+}
+
+.custom-content {
+  padding: 2rem;
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.product-card {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  text-align: center;
+}

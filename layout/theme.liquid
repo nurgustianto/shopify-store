@@ -1,18 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ request.locale.iso_code }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page_title }}</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>{{ page_title | escape }}</title>
+    
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+    
     {{ 'application.css' | asset_url | stylesheet_tag }}
     {{ content_for_header }}
 </head>
 <body>
-    {% include 'header' %}
-    <main>
-        {{ content }}
+    <main role="main" id="MainContent">
+        {{ content_for_layout }}
     </main>
-    {% include 'footer' %}
     {{ 'application.js' | asset_url | script_tag }}
 </body>
 </html>
