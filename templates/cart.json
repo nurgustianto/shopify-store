@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-cart",
+      "settings": {
+        "show_payment_methods": true,
+        "enable_notes": true
+      }
+    },
+    "featured-products": {
+      "type": "cart-recommendations"
+    }
+  },
+  "order": [
+    "main",
+    "featured-products"
+  ]
+}

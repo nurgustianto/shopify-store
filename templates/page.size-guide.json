@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "size-guide",
+      "settings": {
+        "show_measurements": true,
+        "show_conversion_chart": true
+      }
+    }
+  },
+  "order": ["main"]
+}
