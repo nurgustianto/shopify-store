@@ -31,39 +31,43 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Add to cart functionality with animation
-  const addToCartForm = document.querySelector('form[action="/cart/add"]');
+  // Add to cart form handling
+  const addToCartForm = document.getElementById('AddToCartForm');
   if (addToCartForm) {
-    addToCartForm.addEventListener('submit', async (e) => {
+    addToCartForm.addEventListener('submit', async function(e) {
       e.preventDefault();
       
-      const submitButton = addToCartForm.querySelector('[type="submit"]');
+      const submitButton = this.querySelector('#AddToCart');
       submitButton.disabled = true;
-      submitButton.innerHTML = 'Adding...';
-      
-      const formData = new FormData(addToCartForm);
-      
+      submitButton.textContent = 'Adding...';
+
       try {
+        const formData = new FormData(this);
         const response = await fetch('/cart/add.js', {
           method: 'POST',
           body: formData
         });
-        
+
         if (response.ok) {
-          const cartData = await response.json();
+          const cart = await response.json();
           await updateCart();
-          cartDrawer.classList.add('active');
           
-          // Show success animation
-          submitButton.innerHTML = 'Added to Cart!';
+          // Show success state
+          submitButton.textContent = 'Added to Cart!';
+          
+          // Open cart drawer
+          const cartDrawer = document.getElementById('cart-drawer');
+          if (cartDrawer) cartDrawer.classList.add('active');
+          
+          // Reset button after delay
           setTimeout(() => {
             submitButton.disabled = false;
-            submitButton.innerHTML = 'Add to Cart';
+            submitButton.textContent = 'Add to Cart';
           }, 2000);
         }
       } catch (error) {
-        console.error('Error adding to cart:', error);
-        submitButton.innerHTML = 'Error - Try Again';
+        console.error('Error:', error);
+        submitButton.textContent = 'Error - Try Again';
         submitButton.disabled = false;
       }
     });

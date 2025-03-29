@@ -2,4 +2,69 @@
 This file defines the layout for individual product pages, integrating the product-template section.
 {% endcomment %}
 
+<div class="product-page">
+  <div class="product-images">
+    <div class="main-image">
+      <img src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.title }}">
+    </div>
+    <div class="thumbnail-list">
+      {% for image in product.images %}
+        <div class="thumbnail">
+          <img src="{{ image | img_url: 'small' }}" alt="{{ product.title }}">
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="product-details">
+    <h1>{{ product.title }}</h1>
+    <div class="product-price">{{ product.price | money }}</div>
+
+    {% form 'product', product, class: 'product-form', id: 'AddToCartForm' %}
+      {% if product.variants.size > 1 %}
+        <div class="size-selector">
+          <label for="SingleOptionSelector-0">Size</label>
+          <select name="Size" id="SingleOptionSelector-0">
+            {% for variant in product.variants %}
+              <option value="{{ variant.title }}">{{ variant.title }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      {% endif %}
+
+      <div class="customization-options">
+        <div class="input-group">
+          <label for="Name">Name on Jersey</label>
+          <input type="text" id="Name" name="properties[Name]">
+        </div>
+        <div class="input-group">
+          <label for="Number">Number on Jersey</label>
+          <input type="number" id="Number" name="properties[Number]">
+        </div>
+      </div>
+
+      <div class="quantity-selector">
+        <label for="Quantity">Quantity</label>
+        <div class="quantity-wrapper">
+          <button type="button" class="quantity-adjust" data-change="decrease">-</button>
+          <input type="number" id="Quantity" name="quantity" value="1" min="1">
+          <button type="button" class="quantity-adjust" data-change="increase">+</button>
+        </div>
+      </div>
+
+      <button type="submit" name="add" id="AddToCart" class="button button--primary{% unless product.available %} disabled{% endunless %}">
+        {% if product.available %}
+          Add to Cart
+        {% else %}
+          Sold Out
+        {% endif %}
+      </button>
+    {% endform %}
+
+    <div class="product-description">
+      {{ product.description }}
+    </div>
+  </div>
+</div>
+
 {% include 'product-template' %}
