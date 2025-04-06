@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {{ 'cart-drawer.css' | asset_url | stylesheet_tag }}
+</head>
+<body>
+  {% render 'cart-drawer' %}
+  {{ 'cart-drawer.js' | asset_url | script_tag }}
+</body>
+</html>
+
+<div id="cart-overlay" class="cart-overlay"></div>
+<div id="cart-drawer" class="cart-drawer">
+  <div class="cart-header">
+    <h2>Your Cart</h2>
+    <button class="close-cart">×</button>
+  </div>
+  <div id="cart-items" class="cart-items">
+    {% if cart.item_count > 0 %}
+      {% for item in cart.items %}
+        <div class="cart-item">
+          <img src="{{ item.image | img_url: '80x80', crop: 'center' }}" alt="{{ item.title }}">
+          <div class="cart-item-details">
+            <h4>{{ item.title }}</h4>
+            <p>{{ item.price | money }}</p>
+            <div class="quantity-selector">
+              <button data-id="{{ item.id }}" class="quantity-decrease">-</button>
+              <span>{{ item.quantity }}</span>
+              <button data-id="{{ item.id }}" class="quantity-increase">+</button>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>Your cart is empty</p>
+    {% endif %}
+  </div>
+</div>

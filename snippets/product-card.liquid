@@ -3,7 +3,15 @@
   <pre>
 <div class="product-card">
   <a href="{{ product.url }}">
-    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+    <img 
+      loading="lazy"
+      src="{{ product.featured_image | img_url: '300x300' }}"
+      srcset="
+        {{ product.featured_image | img_url: '300x300' }} 300w,
+        {{ product.featured_image | img_url: '600x600' }} 600w"
+      sizes="(max-width: 600px) 300px, 600px"
+      alt="{{ product.featured_image.alt | escape }}"
+    >
     <h3>{{ product.title }}</h3>
     <p>{{ product.price | money }}</p>
   </a>
